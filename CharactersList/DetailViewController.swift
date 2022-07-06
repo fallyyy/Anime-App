@@ -8,9 +8,10 @@
 import UIKit
 import Kingfisher
 
+// TODO: Добавить детальную информацию о тайтле
 class DetailViewController: UIViewController {
     @IBOutlet weak var myLabel: UILabel!
-    var animeData: Titles?
+    var animeData: Title?
     
     override func viewDidLoad() {
         super.viewDidLoad()

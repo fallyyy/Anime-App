@@ -7,13 +7,18 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UISearchResultsUpdating {
     @IBOutlet weak var tableView: UITableView!
-    let getAnimeRequestURL = "https://shikimori.one/api/animes"
-    var localData: Anime?
+    
+    private let searchController = UISearchController(searchResultsController: ResultsViewController())
+    // TODO: Сделать пагинацию для таблицы
+    private let getAnimeRequestURL = "\(Constants.domain)/api/animes?page=1&limit=50"
+    private var localData: [Title] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchController.searchResultsUpdater = self
+        navigationItem.searchController = searchController
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -34,7 +39,7 @@ class ViewController: UIViewController {
                 }
                 
                 do {
-                    let responseData = try JSONDecoder().decode(Anime.self, from: data)
+                    let responseData = try JSONDecoder().decode([Title].self, from: data)
                     self?.localData = responseData
                     self?.tableView.reloadData()
                 } catch let jsonError {
@@ -43,14 +48,21 @@ class ViewController: UIViewController {
             }
         }.resume()
     }
+    
+    // TODO: Для поиска
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        
+        let vc = searchController.searchResultsController as? ResultsViewController
+    }
 }
-
-
 
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return localData?.list.count ?? 0
+        return localData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -58,8 +70,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let titles: Titles? = localData?.list[indexPath.row]
-        cell.configure(with: titles)
+        let title = localData[indexPath.row]
+        cell.configure(with: title)
         return cell
     }
     
@@ -68,8 +80,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if let detailVC = storyboard.instantiateViewController(identifier: "DetailViewController") as? DetailViewController {
-            let titles: Titles? = localData?.list[indexPath.row]
-            detailVC.animeData = titles
+            let title = localData[indexPath.row]
+            detailVC.animeData = title
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }

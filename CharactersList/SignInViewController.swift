@@ -8,7 +8,6 @@
 import UIKit
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
-    
     @IBOutlet weak var textFieldNameId: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var buttonSignIn: UIButton!
@@ -18,6 +17,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         textFieldNameId.delegate = self
         textFieldPassword.delegate = self
+        
         buttonSignIn.layer.cornerRadius = 16
     }
     
@@ -47,7 +47,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             return
         }
         
-        guard let myUrl = URL(string: "https://shikimori.one/api/animes") else {
+        // TODO: Login method.
+        guard let myUrl = URL(string: "\(Constants.domain)/api/login") else {
             displayMessage(userMessage: "Wrong domain link")
             return
         }
@@ -67,8 +68,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         do {
             request.httpBody = try JSONSerialization.data(withJSONObject: requestBody, options: .prettyPrinted)
         } catch let error {
-            print(error.localizedDescription)
-            displayMessage(userMessage: "Something went wrong")
+            displayMessage(userMessage: "Something went wrong: \(error.localizedDescription)")
             return
         }
         
@@ -76,44 +76,38 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             DispatchQueue.main.async {
                 self?.myActivityIndicator.stopAnimating()
                 
-                if error == nil {
-                    self?.displayMessage(userMessage: "Could not sucsessfully perform this request. Please try again later")
-                    print("error")
+                let defaultErrorMessage = "Could not sucsessfully perform this request. Please try again later"
+                
+                guard let data = data,
+                      error == nil else {
+                    self?.displayMessage(userMessage: defaultErrorMessage)
                     return
                 }
+                
                 do {
-                    let json = try JSONSerialization.jsonObject(with: data! , options: .mutableContainers) as?  NSDictionary
+                    let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSDictionary
                     
-                    if let parseJSON = json {
+                    if let parseJSON = json,
+                       let accessToken = parseJSON ["token"] as? String,
+                       let userId = parseJSON ["id"] as? String {
                         
-                     let accessToken = parseJSON ["token"] as? String
-                     let userId = parseJSON ["id"] as? String
-                        print("Accsess token: \(String(describing: accessToken))")
-                    
-                        if (accessToken?.isEmpty) != nil {
-                            self?.displayMessage(userMessage: "Could not sucsessfully perform this request. Please try again later")
-                            return
-                         
-                        }
+                        print("Accsess token: \(accessToken), UserId: \(userId)")
                         
                         DispatchQueue.main.async {
                             let homePage = self?.storyboard?.instantiateViewController(withIdentifier: "HomeViewController") as? ViewController
                             let appDelegate = UIApplication.shared.delegate
                             appDelegate?.window??.rootViewController = homePage
                         }
-                     
-                    }else {
-                        self?.displayMessage(userMessage: "Could not sucsessfully perform this request. Please try again later")
+                    } else {
+                        self?.displayMessage(userMessage: defaultErrorMessage)
                     }
-                    
                 } catch {
                     self?.myActivityIndicator.stopAnimating()
-                    self?.displayMessage(userMessage: "Could not sucsessfully perform this request. Please try again later")
+                    self?.displayMessage(userMessage: defaultErrorMessage)
                 }
-              
             }
         }
         task.resume()
     }
-  
+    
 }

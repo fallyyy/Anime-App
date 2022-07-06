@@ -16,11 +16,14 @@ class MyTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
         
-    func configure(with data: Titles?) {
-        myLabel.text = data?.name ?? "Empty" 
+    func configure(with data: Title?) {
+        guard let data = data else {
+            return
+        }
         
-        if let stringUrl = data?.preview,
-           let url = URL(string: stringUrl) {
+        myLabel.text = data.name
+        
+        if let url = URL(string: data.image.preview) {
             avatarImageView.kf.setImage(with: url)
         }
     }

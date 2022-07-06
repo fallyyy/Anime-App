@@ -7,48 +7,31 @@
 
 import Foundation
 
-struct Anime: Decodable {
-    let list: [Titles]
+struct Constants {
+    static let domain: String = "https://shikimori.one"
 }
 
-struct Titles: Decodable {
+struct Title: Decodable {
     let name: String
     let russian: String
-    let preview: String
+    let image: Image
     let status : String
     let episodes: Int
 }
 
-//struct Rarity: Decodable {
-//    enum CodingKeys: String, CodingKey {
-//        case id, name
-//        case hexColorString = "color"
-//    }
-//
-//    let id: Int
-//    let name: String
-//    let hexColorString: String
-//}
+struct Image: Decodable {
+    enum CodingKeys: String, CodingKey {
+        case preview, original
+    }
+    
+    let preview: String
+    let original: String
 
-
-// JSON EXAMPLE:
-//{
-//    "name": "Blablabla",
-//    "age": 20
-//}
-
-//struct Example: Decodable {
-//    enum CodingKeys: String, CodingKey {
-//        case someName = "name"
-//        case age
-//    }
-//
-//    let someName: String
-//    let age: Int
-//
-//    init(from decoder: Decoder) throws {
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        someName = try container.decode(String.self, forKey: .someName)
-//        age = try container.decode(Int.self, forKey: .age)
-//    }
-//}
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let previewAsset = try container.decode(String.self, forKey: .preview)
+        let originalAsset = try container.decode(String.self, forKey: .original)
+        preview = Constants.domain + previewAsset
+        original = Constants.domain + originalAsset
+    }
+}

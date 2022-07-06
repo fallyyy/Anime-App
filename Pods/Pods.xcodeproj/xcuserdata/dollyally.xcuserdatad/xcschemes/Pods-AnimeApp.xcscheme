@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "51E0E8D408FD41C1376527FB9431DF0E"
-               BuildableName = "Pods_CharactersList.framework"
-               BlueprintName = "Pods-CharactersList"
+               BlueprintIdentifier = "2C6A7B63D84B5C0139F4CAF65E236DD1"
+               BuildableName = "Pods_AnimeApp.framework"
+               BlueprintName = "Pods-AnimeApp"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

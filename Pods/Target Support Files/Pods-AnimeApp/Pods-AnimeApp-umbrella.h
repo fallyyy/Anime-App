@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double Pods_CharactersListVersionNumber;
-FOUNDATION_EXPORT const unsigned char Pods_CharactersListVersionString[];
+FOUNDATION_EXPORT double Pods_AnimeAppVersionNumber;
+FOUNDATION_EXPORT const unsigned char Pods_AnimeAppVersionString[];
 

@@ -10,18 +10,17 @@ import UIKit
 class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
-    private let searchController = UISearchController(searchResultsController: ResultsViewController())
+    private let searchController = UISearchController(searchResultsController: nil)
     // TODO: Сделать пагинацию для таблицы
     private let getAnimeRequestURL = "\(Constants.domain)/api/animes?page=1&limit=50"
     private var localData: [Title] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        searchController.searchResultsUpdater = self
-        navigationItem.searchController = searchController
         tableView.delegate = self
         tableView.dataSource = self
         
+        setupSearchBar()
         getData()
     }
     
@@ -29,7 +28,7 @@ class ViewController: UIViewController {
         guard let url = URL(string: getAnimeRequestURL) else {
             return
         }
-        
+
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             DispatchQueue.main.async { [weak self] in
                 guard error == nil,
@@ -37,7 +36,7 @@ class ViewController: UIViewController {
                     print("Some Error")
                     return
                 }
-                
+
                 do {
                     let responseData = try JSONDecoder().decode([Title].self, from: data)
                     self?.localData = responseData
@@ -50,13 +49,13 @@ class ViewController: UIViewController {
     }
     
     // TODO: Для поиска
-//    func updateSearchResults(for searchController: UISearchController) {
-//        guard let text = searchController.searchBar.text else {
-//            return
-//        }
-//
-//        let vc = searchController.searchResultsController as? ResultsViewController
-//    }
+      func setupSearchBar() {
+        navigationItem.searchController = searchController
+        searchController.searchBar.delegate = self
+        navigationController?.navigationBar.prefersLargeTitles = true
+        searchController.obscuresBackgroundDuringPresentation = false
+    }
+   
 }
 
 
@@ -86,3 +85,33 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
+extension ViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        guard searchText.count > 3 else {
+            return
+        }
+        
+        guard let url = URL(string: "\(Constants.domain)/api/animes?page=1&limit=50&search=\(searchText)") else {
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            DispatchQueue.main.async { [weak self] in
+                guard error == nil,
+                      let data = data else {
+                    print("Some Error")
+                    return
+                }
+
+                do {
+                    let responseData = try JSONDecoder().decode([Title].self, from: data)
+                    self?.localData = responseData
+                    self?.tableView.reloadData()
+                } catch let jsonError {
+                    print("Failed to decode JSON", jsonError)
+                }
+            }
+        }.resume()
+    }
+}
+

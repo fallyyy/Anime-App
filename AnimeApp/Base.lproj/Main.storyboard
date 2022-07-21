@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="CharactersList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AnimeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -20,7 +20,7 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyTableViewCell" rowHeight="147" id="L6H-oN-Nyx" customClass="MyTableViewCell" customModule="CharactersList" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyTableViewCell" rowHeight="147" id="L6H-oN-Nyx" customClass="MyTableViewCell" customModule="AnimeApp" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="147"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L6H-oN-Nyx" id="qdW-Iq-MFh">
@@ -30,8 +30,8 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ytF-jP-dnd">
                                                     <rect key="frame" x="36" y="19" width="50" height="109"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="height" constant="80" id="57B-fH-pVZ"/>
                                                         <constraint firstAttribute="width" constant="50" id="Izg-vM-vEl"/>
-                                                        <constraint firstAttribute="height" constant="50" id="Jdo-Rn-muI"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBm-NP-iMC">
@@ -42,14 +42,12 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="cBm-NP-iMC" firstAttribute="centerY" secondItem="qdW-Iq-MFh" secondAttribute="centerY" id="3Sf-Iy-P8V"/>
                                                 <constraint firstItem="cBm-NP-iMC" firstAttribute="top" secondItem="qdW-Iq-MFh" secondAttribute="top" constant="8" id="RTR-FU-LbS"/>
                                                 <constraint firstItem="cBm-NP-iMC" firstAttribute="leading" secondItem="ytF-jP-dnd" secondAttribute="trailing" constant="16" id="UQd-HN-IDP"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ytF-jP-dnd" secondAttribute="bottom" constant="8" id="YPD-yV-Xwd"/>
                                                 <constraint firstAttribute="trailing" secondItem="cBm-NP-iMC" secondAttribute="trailing" constant="16" id="lXV-4S-FIy"/>
                                                 <constraint firstItem="ytF-jP-dnd" firstAttribute="top" secondItem="qdW-Iq-MFh" secondAttribute="topMargin" constant="8" id="mcb-Yt-UQ4"/>
                                                 <constraint firstItem="ytF-jP-dnd" firstAttribute="leading" secondItem="qdW-Iq-MFh" secondAttribute="leadingMargin" constant="16" id="plW-SK-7U8"/>
-                                                <constraint firstItem="ytF-jP-dnd" firstAttribute="centerY" secondItem="cBm-NP-iMC" secondAttribute="centerY" id="sCx-I7-NHl"/>
                                                 <constraint firstAttribute="bottom" secondItem="cBm-NP-iMC" secondAttribute="bottom" constant="8" id="yO9-wn-xVu"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -82,35 +80,79 @@
         <!--Detail View Controller-->
         <scene sceneID="gaN-re-Gqj">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="slT-in-We6" customClass="DetailViewController" customModule="CharactersList" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tyk-mV-bI5" customClass="DetailViewController">
+                <viewController storyboardIdentifier="DetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="slT-in-We6" customClass="DetailViewController" customModule="AnimeApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tyk-mV-bI5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5W-UX-aTv">
-                                <rect key="frame" x="116" y="99" width="182" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5W-UX-aTv">
+                                <rect key="frame" x="80" y="54" width="254" height="31.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="h6g-al-74t">
+                                <rect key="frame" x="40" y="125.5" width="334" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="Ppu-fM-ZFm"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2SV-Qz-ty7">
+                                <rect key="frame" x="40" y="490.5" width="334" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXm-14-mIn">
+                                <rect key="frame" x="40" y="556.5" width="334" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZf-c1-SdT">
+                                <rect key="frame" x="40" y="524.5" width="334" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ls9-dn-c6c"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ls9-dn-c6c" firstAttribute="trailing" secondItem="h6g-al-74t" secondAttribute="trailing" constant="40" id="6ky-hA-Ywb"/>
+                            <constraint firstItem="2SV-Qz-ty7" firstAttribute="top" secondItem="h6g-al-74t" secondAttribute="bottom" constant="65" id="7W0-sd-8NC"/>
+                            <constraint firstItem="ls9-dn-c6c" firstAttribute="trailing" secondItem="A5W-UX-aTv" secondAttribute="trailing" constant="80" id="CiB-mD-mZf"/>
+                            <constraint firstItem="fZf-c1-SdT" firstAttribute="top" secondItem="2SV-Qz-ty7" secondAttribute="bottom" constant="10" id="Cmd-NI-63F"/>
+                            <constraint firstItem="A5W-UX-aTv" firstAttribute="leading" secondItem="ls9-dn-c6c" secondAttribute="leading" constant="80" id="DRO-3B-p7p"/>
+                            <constraint firstItem="RXm-14-mIn" firstAttribute="leading" secondItem="ls9-dn-c6c" secondAttribute="leading" constant="40" id="GWZ-Pa-vDM"/>
+                            <constraint firstItem="h6g-al-74t" firstAttribute="top" secondItem="A5W-UX-aTv" secondAttribute="bottom" constant="40" id="Jnv-6S-nvS"/>
+                            <constraint firstItem="2SV-Qz-ty7" firstAttribute="leading" secondItem="ls9-dn-c6c" secondAttribute="leading" constant="40" id="PI0-6F-duu"/>
+                            <constraint firstItem="A5W-UX-aTv" firstAttribute="top" secondItem="ls9-dn-c6c" secondAttribute="top" constant="10" id="PLE-Wp-uPy"/>
+                            <constraint firstItem="h6g-al-74t" firstAttribute="leading" secondItem="ls9-dn-c6c" secondAttribute="leading" constant="40" id="b9K-lw-xLN"/>
+                            <constraint firstItem="RXm-14-mIn" firstAttribute="top" secondItem="fZf-c1-SdT" secondAttribute="bottom" constant="8" symbolic="YES" id="flf-d0-8UB"/>
+                            <constraint firstItem="ls9-dn-c6c" firstAttribute="trailing" secondItem="2SV-Qz-ty7" secondAttribute="trailing" constant="40" id="oNP-je-7jz"/>
+                            <constraint firstItem="fZf-c1-SdT" firstAttribute="leading" secondItem="ls9-dn-c6c" secondAttribute="leading" constant="40" id="xBA-z4-qge"/>
+                            <constraint firstItem="ls9-dn-c6c" firstAttribute="trailing" secondItem="fZf-c1-SdT" secondAttribute="trailing" constant="40" id="yRt-bc-SPj"/>
+                            <constraint firstItem="ls9-dn-c6c" firstAttribute="trailing" secondItem="RXm-14-mIn" secondAttribute="trailing" constant="40" id="zmq-Wg-dVG"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xCe-bN-lf3"/>
                     <connections>
-                        <outlet property="myLabel" destination="A5W-UX-aTv" id="V2P-e3-KJ0"/>
+                        <outlet property="animeImageView" destination="h6g-al-74t" id="JBs-2n-9vg"/>
+                        <outlet property="episodesLabel" destination="RXm-14-mIn" id="QaX-vb-tbF"/>
+                        <outlet property="myLabel" destination="A5W-UX-aTv" id="8Cy-uB-1KA"/>
+                        <outlet property="russianNameLabel" destination="2SV-Qz-ty7" id="YLY-Mf-hvd"/>
+                        <outlet property="statusLabel" destination="fZf-c1-SdT" id="9F9-t3-9CJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HK1-SQ-nyl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="642.02898550724638" y="-1449.7767857142856"/>
+            <point key="canvasLocation" x="640.57971014492762" y="-1449.7767857142856"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="wHc-FA-koH">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="xyz-bu-Orz" customClass="SignInViewController" customModule="CharactersList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="xyz-bu-Orz" customClass="SignInViewController" customModule="AnimeApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zaW-sh-H5J">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -9,23 +9,28 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    
     private let searchController = UISearchController(searchResultsController: nil)
     // TODO: Сделать пагинацию для таблицы
-    private let getAnimeRequestURL = "\(Constants.domain)/api/animes?page=1&limit=50"
     private var localData: [Title] = []
+    var favoriteAnime = [Int:Bool]()
+    
+//    for pagination
+    var isDataLoading:Bool = false
+    var pageNo: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.refreshControl = UIRefreshControl()
+        
         setupSearchBar()
         getData()
     }
     
-    func getData() {
-        guard let url = URL(string: getAnimeRequestURL) else {
+    func getData(page: Int = 0, limit: Int = 50) {
+        guard let url = URL(string: "\(Constants.domain)/api/animes?page=\(page)&limit=\(limit)") else {
             return
         }
 
@@ -39,7 +44,7 @@ class ViewController: UIViewController {
 
                 do {
                     let responseData = try JSONDecoder().decode([Title].self, from: data)
-                    self?.localData = responseData
+                    self?.localData += responseData
                     self?.tableView.reloadData()
                 } catch let jsonError {
                     print("Failed to decode JSON", jsonError)
@@ -68,14 +73,25 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.id, for: indexPath) as? MyTableViewCell else {
             return UITableViewCell()
         }
+        if favoriteAnime [indexPath.row] == true
+        {
+            cell.heartImage.image = UIImage(named: "filledHeart")
+        }
+        else
+        {
+            cell.heartImage.image = UIImage(named: "heart")
+        }
         
         let title = localData[indexPath.row]
         cell.configure(with: title)
         return cell
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true	)
+        let cell = tableView.cellForRow(at: indexPath) as? MyTableViewCell
+        cell?.heartImage.image = UIImage(named: "filledHeart")
+        favoriteAnime[indexPath.row] = true
+        
+        tableView.deselectRow(at: indexPath, animated: true    )
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
         if let detailVC = storyboard.instantiateViewController(identifier: "DetailViewController") as? DetailViewController {
@@ -84,6 +100,47 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
+        let cell = tableView.cellForRow(at: indexPath) as? MyTableViewCell
+        cell?.heartImage.image = UIImage(named: "heart")
+        favoriteAnime[indexPath.row] = false
+        
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        print("scrollViewWillBeginDragging")
+        isDataLoading = false
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        print("scrollViewDidEndDecelerating")
+    }
+
+// Pagination
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print("scrollViewDidEndDragging")
+        let firstCalc = tableView.contentOffset.y + tableView.frame.size.height
+        let secondCalc = tableView.contentSize.height
+        if (firstCalc >= secondCalc) {
+            if !isDataLoading {
+                isDataLoading = true
+                pageNo += 1
+                getData(page: pageNo)
+            }
+        }
+    }
+//   Favorites
+
+    private func blankFavoriteAnime(){
+        for i in 0...favoriteAnime.count
+        {
+            favoriteAnime[i] = false
+        }
+    }
+
+    
+    
 }
 extension ViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

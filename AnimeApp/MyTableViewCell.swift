@@ -11,6 +11,7 @@ import Kingfisher
 class MyTableViewCell: UITableViewCell {
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var heartImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

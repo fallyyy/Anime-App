@@ -75,6 +75,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		3464C6CD28F0BD7700D6889C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				68689F64283FED7D004D47E9 /* MyTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		683FE519283849C2006F55A6 = {
 			isa = PBXGroup;
 			children = (
@@ -102,7 +110,6 @@
 				683FE525283849C2006F55A6 /* AppDelegate.swift */,
 				683FE531283849C4006F55A6 /* Assets.xcassets */,
 				683FE536283849C4006F55A6 /* Info.plist */,
-				68689F64283FED7D004D47E9 /* MyTableViewCell.swift */,
 				683FE527283849C2006F55A6 /* SceneDelegate.swift */,
 				683FE52B283849C2006F55A6 /* Main.storyboard */,
 				683FE533283849C4006F55A6 /* LaunchScreen.storyboard */,
@@ -113,6 +120,7 @@
 		687F88AB2875E3B40092D9E8 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				3464C6CD28F0BD7700D6889C /* Views */,
 				68961DE0286CAD1F0021E66D /* SignInViewController.swift */,
 				683FE529283849C2006F55A6 /* ViewController.swift */,
 				684DB836284F8E5A00C9240D /* DetailViewController.swift */,

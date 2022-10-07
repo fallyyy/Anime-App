@@ -14,25 +14,24 @@ class FavoriteListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for i in 0...favoriteList.count
-        {
+        for i in 0...favoriteList.count {
             tempList.append(i)
         }
     }
     
 }
 
-//extension FavoriteListViewController: UITableViewDelegate, UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return tempList.count
-//    }
+extension FavoriteListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tempList.count
+    }
     
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-////        let cell = myTableView.dequeueReusableCell(withIdentifier: MyTableViewCell.id)
-//
-//
-//
-//    }
-//
-//
-//}
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = myTableView.dequeueReusableCell(withIdentifier: MyTableViewCell.id) as? MyTableViewCell else {
+            return UITableViewCell()
+        }
+ 
+        return cell
+    }
+}
+

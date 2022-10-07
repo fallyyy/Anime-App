@@ -73,22 +73,21 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MyTableViewCell.id, for: indexPath) as? MyTableViewCell else {
             return UITableViewCell()
         }
-        if favoriteAnime [indexPath.row] == true
-        {
-            cell.heartImage.image = UIImage(named: "filledHeart")
-        }
-        else
-        {
-            cell.heartImage.image = UIImage(named: "heart")
+        
+        if favoriteAnime [indexPath.row] == true {
+            cell.heartImageView.image = UIImage(named: "filledHeart")
+        } else {
+            cell.heartImageView.image = UIImage(named: "heart")
         }
         
         let title = localData[indexPath.row]
         cell.configure(with: title)
         return cell
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as? MyTableViewCell
-        cell?.heartImage.image = UIImage(named: "filledHeart")
+        cell?.heartImageView.image = UIImage(named: "filledHeart")
         favoriteAnime[indexPath.row] = true
         
         tableView.deselectRow(at: indexPath, animated: true    )
@@ -100,9 +99,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             navigationController?.pushViewController(detailVC, animated: true)
         }
     }
+    
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath){
         let cell = tableView.cellForRow(at: indexPath) as? MyTableViewCell
-        cell?.heartImage.image = UIImage(named: "heart")
+        cell?.heartImageView.image = UIImage(named: "heart")
         favoriteAnime[indexPath.row] = false
         
     }

@@ -11,7 +11,7 @@ import Kingfisher
 class MyTableViewCell: UITableViewCell {
     @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var avatarImageView: UIImageView!
-    @IBOutlet weak var heartImage: UIImageView!
+    @IBOutlet weak var heartImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -21,7 +21,7 @@ class MyTableViewCell: UITableViewCell {
         guard let data = data else {
             return
         }
-        
+                
         myLabel.text = data.name
         
         if let url = URL(string: data.image.preview) {

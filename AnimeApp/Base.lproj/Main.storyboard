@@ -35,21 +35,26 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cBm-NP-iMC">
-                                                    <rect key="frame" x="102" y="8" width="292" height="131"/>
+                                                    <rect key="frame" x="102" y="8" width="260" height="131"/>
                                                     <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="heart_png" translatesAutoresizingMaskIntoConstraints="NO" id="jt6-Ua-zU7">
-                                                    <rect key="frame" x="364" y="-635" width="35" height="1417"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart_png" translatesAutoresizingMaskIntoConstraints="NO" id="jt6-Ua-zU7">
+                                                    <rect key="frame" x="378" y="63.5" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="TcV-v8-tBe"/>
+                                                        <constraint firstAttribute="width" constant="20" id="kA5-PK-zvo"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="jt6-Ua-zU7" firstAttribute="leading" secondItem="cBm-NP-iMC" secondAttribute="trailing" constant="16" id="1Qs-z5-toy"/>
+                                                <constraint firstItem="jt6-Ua-zU7" firstAttribute="centerY" secondItem="cBm-NP-iMC" secondAttribute="centerY" id="DHN-gY-8iD"/>
+                                                <constraint firstAttribute="trailing" secondItem="jt6-Ua-zU7" secondAttribute="trailing" constant="16" id="M5C-fa-cCf"/>
                                                 <constraint firstItem="cBm-NP-iMC" firstAttribute="top" secondItem="qdW-Iq-MFh" secondAttribute="top" constant="8" id="RTR-FU-LbS"/>
                                                 <constraint firstItem="cBm-NP-iMC" firstAttribute="leading" secondItem="ytF-jP-dnd" secondAttribute="trailing" constant="16" id="UQd-HN-IDP"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="ytF-jP-dnd" secondAttribute="bottom" constant="8" id="YPD-yV-Xwd"/>
-                                                <constraint firstAttribute="trailing" secondItem="cBm-NP-iMC" secondAttribute="trailing" constant="20" id="lXV-4S-FIy"/>
                                                 <constraint firstItem="ytF-jP-dnd" firstAttribute="top" secondItem="qdW-Iq-MFh" secondAttribute="topMargin" constant="8" id="mcb-Yt-UQ4"/>
                                                 <constraint firstItem="ytF-jP-dnd" firstAttribute="leading" secondItem="qdW-Iq-MFh" secondAttribute="leadingMargin" constant="16" id="plW-SK-7U8"/>
                                                 <constraint firstItem="cBm-NP-iMC" firstAttribute="centerY" secondItem="qdW-Iq-MFh" secondAttribute="centerY" id="qVX-ck-qwu"/>
@@ -58,7 +63,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="avatarImageView" destination="ytF-jP-dnd" id="xBp-Ig-4Pc"/>
-                                            <outlet property="heartImage" destination="jt6-Ua-zU7" id="1cq-7p-ZgL"/>
+                                            <outlet property="heartImageView" destination="jt6-Ua-zU7" id="1cq-7p-ZgL"/>
                                             <outlet property="myLabel" destination="cBm-NP-iMC" id="Ial-Tf-eMU"/>
                                         </connections>
                                     </tableViewCell>
